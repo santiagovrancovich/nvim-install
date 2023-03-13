@@ -3,6 +3,7 @@
 
 NVIM_URL="https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz"
 RIPGREP_URL="https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep-13.0.0-x86_64-unknown-linux-musl.tar.gz"
+NERDFONT_URL="https://github.com/ryanoasis/nerd-fonts/raw/HEAD/patched-fonts/JetBrainsMono/NoLigatures/Regular/complete/JetBrains%20Mono%20NL%20Nerd%20Font%20Complete%20Regular.ttf"
 
 #Nvim install
 if ! nvim -v &> /dev/null; 
@@ -44,6 +45,15 @@ if ! rg -V &> /dev/null;
     echo "ripgrep already installed"
 fi
 
+#Downloading NerdFont
+if [ ! -f "$HOME/.local/share/fonts/JetBrains Mono NL Nerd Font Complete Regular.ttf" ]; 
+  then
+    wget $NERDFONT_URL -P $HOME/.local/share/fonts -q --show-progress
+    echo "Installed nerdfont"
+  else
+    echo "nerdfont already installed"
+fi
+
 #Adding path to .bashrc
 echo >> $HOME/.bashrc
 echo "export PATH=$PATH" >> $HOME/.bashrc 
@@ -52,7 +62,7 @@ echo "export PATH=$PATH" >> $HOME/.bashrc
 echo "Dowloading config files"
 rm -rf $HOME/.local/share/nvim
 rm -rf $HOME/.config/nvim
-git clone https://github.com/NvChad/NvChad $HOME/.config/nvim
+git clone -b main --single-branch https://github.com/NvChad/NvChad $HOME/.config/nvim
 cp -r ./custom $HOME/.config/nvim/lua/custom
 
 echo "Instalation finished"
