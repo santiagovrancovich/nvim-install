@@ -13,7 +13,7 @@ dap.adapters.cppdbg = {
 
 dap.adapters.python = {
   type = 'executable';
-  command = "/home/" .. os.getenv("USER") .. "/.local/share/nvim/mason/bin/debugpy",
+  command = "/home/" .. os.getenv("USER") .. "/.local/share/nvim/mason/packages/debugpy/venv/bin/python",
   args = { '-m', 'debugpy.adapter' };
 }
 
